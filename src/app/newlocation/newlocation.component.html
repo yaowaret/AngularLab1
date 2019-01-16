@@ -1,0 +1,27 @@
+
+<div class="container">
+  <form [formGroup]="angForm" novalidate>
+    <div class="form-group">
+      <label>Location: </label>
+      <input class="form-control" formControlName="location2" type="text" placeholder="Input Your location"
+        #newlocation (enter)="addlocation(newlocation.value)">
+    </div>
+
+    <div *ngIf="angForm.controls['location2'].invalid && (angForm.controls['location2'].dirty || angForm.controls['location2'].touched)"
+      class="alert alert-danger">
+      <div *ngIf="angForm.controls['location2'].errors.required">
+        Location is required.
+      </div>
+
+      <div *ngIf="angForm.controls['location2'].errors.minlength">
+        Must be at least 5 characters long.
+      </div>
+    </div>
+    <button [disabled]="angForm.pristine || angForm.invalid" class="btn btn-sm btn-primary" (click)="addlocation(newlocation.value)"
+      *ngIf="!isEdit" name="clear" type="reset" value="Cancle">
+      <span class="glyphicon glyphicon-plus"></span>Add</button>
+    <input [disabled]="angForm.pristine" class="btn btn-sm btn-light" name="clear" type="reset" value="Cancle">
+
+  </form>
+
+</div>

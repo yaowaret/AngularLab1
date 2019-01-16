@@ -1,0 +1,23 @@
+@import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+
+thead{
+    background:white;
+    border-left: 4px solid #900C3F ;
+    padding: 1em;
+    margin: 1em auto;
+    color: #A3A3A3;
+    font-family: "Raleway";
+   }
+i{
+    float: center;
+    color:#C70039  ;
+    cursor: pointer;
+}
+.city{
+    background-color: tomato;
+    color: white;
+    padding: 10px;
+}
+h5 {
+    color: #CDCDCD;
+  }

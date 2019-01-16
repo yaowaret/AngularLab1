@@ -1,0 +1,128 @@
+<br>
+<div class="container">
+    <form [formGroup]="angForm" novalidate>
+        <div class="form-group">
+            <label>Name: </label>
+            <input class="form-control" formControlName="name" type="text" #ddetail (enter)="addDetail(ddetail.value)"
+                placeholder="Input your name">
+        </div>
+        <div *ngIf="angForm.controls['name'].invalid && (angForm.controls['name'].dirty || angForm.controls['name'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="angForm.controls['name'].errors.required">
+                Please input your name.
+            </div>
+
+            <div *ngIf="angForm.controls['name'].errors.maxlength">
+                Name can be max 50 characters long
+            </div>
+
+            <div *ngIf="angForm.controls['name'].errors.minlength">
+                Must be at least 5 characters long.
+            </div>
+
+            <div *ngIf="angForm.controls['name'].errors.pattern">
+                Please match the required format.
+            </div>
+        </div>
+
+        <!-- Form email -->
+        <div class="form-group">
+            <label>Email: </label>
+            <input class="form-control" formControlName="email" type="text" #emails (enter)="addDetail(emails.value)"
+                placeholder="Enter an email address">
+            <h5>Example email: email@company.com </h5>
+        </div>
+        <div *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="angForm.controls['email'].errors.required">
+                Please input your email.
+            </div>
+            <div *ngIf="angForm.controls['email'].errors.pattern">
+                Please match the required format.
+            </div>
+        </div>
+
+        <!-- Form Age -->
+        <div class="form-group">
+            <label>Age: </label>
+            <input class="form-control" formControlName="age" type="text" #ages (enter)="addDetail(ages.value)"
+                placeholder="Your Age">
+        </div>
+        <div *ngIf="angForm.controls['age'].invalid && (angForm.controls['age'].dirty || angForm.controls['age'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="angForm.controls['age'].errors.required">
+                Please input your Age.
+            </div>
+            <div *ngIf="angForm.controls['age'].errors.pattern">
+                Please match the required format.
+            </div>
+            <div *ngIf="angForm.controls['age'].errors.maxlength">
+                Must be at least 2 characters long.
+            </div>
+        </div>
+        <!-- select Location -->
+        <div class="form-group">
+            <div class="radio">
+                <label>
+                    <input type="radio" id="sexMale" value="Male">
+                    Male
+                </label>
+                <label>
+                    <input type="radio" id="sexFemale" value="Female">
+                    Female
+                </label>
+            </div>
+        </div>
+        <!-- select Location -->
+
+        <div class="form-group">
+            <label for="location">Location</label>
+            <select id="location" class="form-control" formControlName="location" type="text" #clocation (enter)="addDetail(clocation.value)">
+                <option *ngFor="let location of locationArray" [value]="location">{{location}}</option>
+            </select>
+        </div>
+        <div *ngIf="angForm.controls['location'].invalid && (angForm.controls['location'].dirty || angForm.controls['location'].touched)"
+            class="alert alert-warning">
+            <div *ngIf="angForm.controls['location'].errors.required">
+                Location is required.
+            </div>
+        </div>
+
+        <!-- Form Button -->
+
+        <button [disabled]="angForm.pristine || angForm.invalid" class="btn btn-sm btn-success" (click)="addDetail(ddetail.value,emails.value,clocation.value,ages.value)"
+            *ngIf="!isEdit" name="clear" type="reset" value="Cancle" > 
+            Submit</button>
+
+        <button (click) = "testna()" > Test  </button>
+            
+        <input [disabled]="angForm.pristine" class="btn btn-sm btn-light" name="clear" type="reset" value="Cancle">
+        <br><br>
+
+        <!-- Form table -->
+        <table class="table table-condensed">
+            <thead>
+                <tr class="table-info">
+                    <th>Name Student</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>Location</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let box of details; let ind = index">
+                    <td>{{box.name}}</td>
+                    <td>{{box.email}}</td>
+                    <td>{{box.age}}</td>
+                    <td>{{box.location}}</td>
+                    <span (click)="removeItem(ind)"><i class="glyphicon glyphicon-trash"> </i></span>
+                </tr>
+            </tbody>
+        </table>
+        <!-- <li *ngFor="let ddetail of details; let ind = index">
+          {{ddetail}} 
+          <i class="glyphicon glyphicon-trash" (click) = "removeItem(ind)"></i> 
+        </li>    -->
+    </form>
+</div>
