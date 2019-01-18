@@ -18,7 +18,7 @@ export class NewstaffComponent {
   public ages: string;
   @Input() locationArray: Array<string>;
 
-  constructor(private fb: FormBuilder, public coopService: CoopService, public newstarffService: NewstaffService) { 
+  constructor(private fb: FormBuilder, public coopService: CoopService, public newstarffService: NewstaffService) {
     this.createForm();
     this.details = [];
     this.locationArray = [];
@@ -34,33 +34,37 @@ export class NewstaffComponent {
   }
   addDetail(param1: string, param2: string, param3: string, param4: string) {
     var box = { name: param1, email: param2, location: param3, age: param4 };
-    this.details.push(box);
+    console.log('box',box)
+    this.details.push(box); {
+    this.newstarffService.addNewStaff(box).subscribe(result => {
+      console.log('responed from API:',result)
+    })
   }
-  addlocation(locationparam: string) {
-
-    // this.locationArray.push(locationparam);
-    this.coopService.addNewLocation(locationparam)
-  }
+}
+  
+  // addDetail(param1: string, param2: string, param3: string, param4: string) {
+  //   var box = { name: param1, email: param2, location: param3, age: param4 };
+  //   this.details.push(box);
+  // }
 
   removeItem = function (index) {
     this.details.splice(index, 1);
   }
 
   ngOnInit(params) {
-    console.log('ALWAYS LOG THIS AFTER INIT:', this.locationArray,this.details)
+    console.log('ALWAYS LOG THIS AFTER INIT:', this.locationArray, this.details)
     this.locationArray = this.coopService.locationArray
-    this.details= this.coopService.details
+    this.details = this.coopService.details
+    
     this.coopService.Outputlocation.subscribe((params) => {
       console.log('PARAMS:', params)
       this.locationArray = params;
       console.log('Location:', this.locationArray)
     });
-  
+    //TODO: Create function for retrieve data from ExpressJS
+    //TODO: Create Variables for store data Type: Array[{...something}] aka locationArray
+    //TODO: Show data in template using *ngFor
+
   }
 
-  testna(){
-    this.newstarffService.register().subscribe(result => {
-      console.log(result)
-    } ) 
-  }
 }
