@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NewlocationComponent } from './newlocation.component';
 
 import { CoopService } from '../coop.service';
+import { NewlocationService } from './newlocation.service'
 @NgModule({
   declarations: [NewlocationComponent],
   imports: [
@@ -15,7 +16,7 @@ import { CoopService } from '../coop.service';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [CoopService],
+  providers: [CoopService, NewlocationService],
   bootstrap: [NewlocationComponent]
 })
 export class NewlocationModule { }

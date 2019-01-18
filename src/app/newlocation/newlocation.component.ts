@@ -2,6 +2,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { CoopService } from '../coop.service'
+import { NewlocationService } from './newlocation.service'
 
 @Component({
   selector: 'app-newlocation',
@@ -14,14 +15,14 @@ export class NewlocationComponent {
 
   @Output() Outputlocation: EventEmitter<any> = new EventEmitter();
 
-  constructor(private fb: FormBuilder, public coopService: CoopService) {
+  constructor(public newlocationService: NewlocationService, private fb: FormBuilder, public coopService: CoopService) {
 
     this.createForm();
     this.locationArray = [];
 
-   }
+  }
 
-   createForm() {
+  createForm() {
     this.angForm = this.fb.group({
       location2: [null, [Validators.required, Validators.minLength(5)]]
     });
@@ -30,7 +31,10 @@ export class NewlocationComponent {
   addlocation(locationparam: string) {
 
     // this.locationArray.push(locationparam);
-    this.coopService.addNewLocation(locationparam)
+    // this.coopService.addNewLocation(locationparam)
+    this.newlocationService.addNewLocation({ location: locationparam }).subscribe(x => {
+      console.log('responed from API:', x)
+    })
   }
 
   removeItem = function (index) {
