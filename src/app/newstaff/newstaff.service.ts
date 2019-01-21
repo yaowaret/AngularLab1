@@ -12,4 +12,11 @@ export class NewstaffService {
   addNewStaff(params){
     return this.http.post('/api/saveuser',params)
   } 
+  userList(){
+    return this.http.get('/api/usersList')
+  }
+  locationList(){
+    return this.http.get('/api/getlocation')
+  }
+  
 }

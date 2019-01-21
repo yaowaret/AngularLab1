@@ -73,12 +73,14 @@
                 </label>
             </div>
         </div> -->
+
         <!-- select Location -->
 
         <div class="form-group">
             <label for="location">Location</label>
             <select id="location" class="form-control" formControlName="location" type="text" #clocation (enter)="addDetail(clocation.value)">
-                <option *ngFor="let location of locationArray" [value]="location">{{location}}</option>
+                <option *ngFor="let location of locationArray" [value]="location.name">{{location.name}}</option>
+                <option [ngValue]="null">Select name this location</option>
             </select>
         </div>
         <div *ngIf="angForm.controls['location'].invalid && (angForm.controls['location'].dirty || angForm.controls['location'].touched)"
@@ -90,7 +92,7 @@
 
         <!-- Form Button -->
 
-        <button  class="btn btn-sm btn-success" (click)="addDetail(ddetail.value,emails.value,clocation.value,ages.value)"
+        <button [disabled]="angForm.pristine || angForm.invalid" class="btn btn-sm btn-success" (click)="addDetail(ddetail.value,emails.value,clocation.value,ages.value)"
             *ngIf="!isEdit" name="clear" type="reset" value="Cancle" > 
             Submit</button>
         <input [disabled]="angForm.pristine" class="btn btn-sm btn-light" name="clear" type="reset" value="Cancle">
@@ -101,20 +103,24 @@
         <table class="table table-condensed">
             <thead>
                 <tr class="table-info">
+                    <th>ID</th>
                     <th>Name Student</th>
                     <th>Email</th>
                     <th>Age</th>
                     <th>Location</th>
                     <th>Delete</th>
+                    <th>Edit</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let box of details; let ind = index">
+                        <td>{{box._id}}</td>
                     <td>{{box.name}}</td>
                     <td>{{box.email}}</td>
                     <td>{{box.age}}</td>
                     <td>{{box.location}}</td>
-                    <span (click)="removeItem(ind)"><i class="glyphicon glyphicon-trash"> </i></span>
+                    <td> <span (click)="removeItem(ind)"><i class="glyphicon glyphicon-trash"> </i></span> </td>
+                    <td> <span (click)="removeItem(ind)"><i class="	glyphicon glyphicon-pencil"> </i></span> </td>
                 </tr>
             </tbody>
         </table>

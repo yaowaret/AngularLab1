@@ -36,9 +36,9 @@ export class NewlocationComponent {
       console.log('responed from API:', x)
     })
   }
-
-  removeItem = function (index) {
-    this.details.splice(index, 1);
-  }
+ 
+  // removeItem = function (index) {
+  //   this.details.splice(index, 1);
+  // }
 
 }
